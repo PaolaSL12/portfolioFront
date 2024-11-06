@@ -7,12 +7,14 @@
   --psl-color-4: #5E807F;
   --psl-color-5: #1E1E1E; 
 
+  --psl-margin-xxs: 7px;
   --psl-margin-xs: 10px;
   --psl-margin-s: 20px;
   --psl-margin-m: 30px;
   --psl-margin-l: 40px;
   --psl-margin-xl: 50px;
 
+  --psl-padding-xxs: 5px;
   --psl-padding-xs: 10px;
   --psl-padding-s: 20px;
   --psl-padding-m: 30px;
