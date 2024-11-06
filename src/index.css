@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+  --psl-color-1: #EBEBEB;
+  --psl-color-2: #D7D0C8; 
+  --psl-color-3: #BD897E; 
+  --psl-color-4: #5E807F;
+  --psl-color-5: #1E1E1E; 
+
+  --psl-margin-xs: 10px;
+  --psl-margin-s: 20px;
+  --psl-margin-m: 30px;
+  --psl-margin-l: 40px;
+  --psl-margin-xl: 50px;
+
+  --psl-padding-xs: 10px;
+  --psl-padding-s: 20px;
+  --psl-padding-m: 30px;
+  --psl-padding-l: 40px;
+  --psl-padding-xl: 50px;
+
+  --psl-gap-s: 20px;
+  --psl-gap-m: 40px;
+  --psl-gap-l: 60px;
+
+  --psl-br: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: var(--psl-color-5);
+  font-family: "Source Code Pro", monospace;
+  user-select: none;
+}
+
