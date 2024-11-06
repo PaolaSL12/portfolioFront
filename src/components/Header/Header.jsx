@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import "./Header.css";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import ImgWrapper from "../ImgWrapper/ImgWrapper.jsx";
+import { LanguageContext } from "../../utils/Context/LenguageContext.jsx";
+import './Header.css'
 
 const Header = () => {
+  const { language, toggleLanguage } = useContext(LanguageContext); 
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState(localStorage.getItem("language") || "ES");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,17 +16,6 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
-  const toggleLanguage = (e) => {
-    e.stopPropagation();
-    const newLanguage = language === "ES" ? "EN" : "ES";
-    setLanguage(newLanguage);
-    localStorage.setItem("language", newLanguage);
-  };
-
-  useEffect(() => {
-    console.log(`Idioma seleccionado: ${language}`);
-  }, [language]);
 
   return (
     <nav>
@@ -49,41 +40,39 @@ const Header = () => {
       <ul className={`menu ${isMenuOpen ? "open" : ""}`} onClick={closeMenu}>
         <li>
           <NavLink to="/" onClick={closeMenu}>
-            {language === "ES" ? "HOME" : "HOME"}
+            {language === "es" ? "HOME" : "HOME"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/proyects" onClick={closeMenu}>
-            {language === "ES" ? "PROYECTOS" : "PROJECTS"}
+            {language === "es" ? "PROYECTOS" : "PROJECTS"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/education" onClick={closeMenu}>
-            {language === "ES" ? "CERTIFICADOS" : "CERTIFICATES"}
+            {language === "es" ? "CERTIFICADOS" : "CERTIFICATES"}
           </NavLink>
         </li>
         <li>
           <NavLink to="/contacts" onClick={closeMenu}>
-            {language === "ES" ? "CONTACTO" : "CONTACT"}
+            {language === "es" ? "CONTACTO" : "CONTACT"}
           </NavLink>
         </li>
         <li>
           <button
             className="language-toggle"
-            onClick={toggleLanguage}
+            onClick={toggleLanguage} 
             aria-label={
-              language === "ES"
-                ? "Cambiar idioma a Inglés"
-                : "Switch to Spanish"
+              language === "es" ? "Cambiar idioma a Inglés" : "Switch to Spanish"
             }
           >
             <ImgWrapper
               c={"flag-icon"}
-              url={language === "ES" ? "./assets/es.png" : "./assets/en.png"}
-              alt={language === "ES" ? "Bandera de España" : "U.S. Flag"}
+              url={language === "es" ? "./assets/es.png" : "./assets/en.png"}
+              alt={language === "es" ? "Bandera de España" : "U.S. Flag"}
             />
             <span className="language-label">
-              {language === "ES" ? "ES" : "EN"}
+              {language === "es" ? "ES" : "EN"}
             </span>
           </button>
         </li>
