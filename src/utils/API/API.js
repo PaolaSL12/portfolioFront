@@ -6,6 +6,7 @@ export const API = async ({ endpoint, language }) => {
   
       if (res.ok) {
         const data = await res.json();
+        
         return data;
       } else {
         throw new Error("Error fetching data from API");

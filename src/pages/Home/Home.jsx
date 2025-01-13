@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import { API } from "../../utils/API/API";
 import ImgWrapper from "../../components/ImgWrapper/ImgWrapper";
 import "./Home.css";
@@ -12,33 +11,33 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    API({ endpoint: "profiles", language })
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null); 
+
+      try {
+        const data = await API({ endpoint: "profiles", language });
         setProfileData(data);
+      } catch (err) {
+        setError(err.message || "Unexpected error occurred");
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [language]);  
+      }
+    };
 
-  if (loading) return <p>Loading...</p>;
-
-  if (error) return <p>{`Error: ${error}`}</p>;
+    fetchData();
+  }, [language]); 
 
   return (
     <div className="home">
       <ImgWrapper c={"heroImg"} url={"./assets/icon.png"} alt={"heroImg"} />
-      <div className="infoHero">
-        {profileData ? (
-          <div>
-            <p>{profileData[0].aboutMe}</p>
-          </div>
-        ) : (
-          <p>No profile data available.</p>
-        )}
-      </div>
+      {loading && <p>Loading...</p>}
+      {error && <p className="error">{`Error: ${error}`}</p>}
+      {!loading && !error && profileData ? (
+        <div className="infoHero">
+          <p>{profileData[0]?.aboutMe || "No information available."}</p>
+        </div>
+      ) : null}
     </div>
   );
 };
