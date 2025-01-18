@@ -44,7 +44,7 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/proyects" onClick={closeMenu}>
+          <NavLink to="/projects" onClick={closeMenu}>
             {language === "es" ? "PROYECTOS" : "PROJECTS"}
           </NavLink>
         </li>
