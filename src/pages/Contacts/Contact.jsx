@@ -1,51 +1,90 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import "./Contact.css";
 import { LanguageContext } from "../../utils/Context/LenguageContext";
+import { useForm } from "react-hook-form";
 import { API } from "../../utils/API/API";
 
 const Contact = () => {
   const { language } = useContext(LanguageContext);
-  const [contact, setContact] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchContact = async () => {
-      setLoading(true);
-      setError(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-      try {
-        const data = await API({ endpoint: "contacts", language });
-        console.log(data)
-        setContact(data);
-      } catch (err) {
-        setError(err.message || "Failed to fetch contacts.");
-      } finally {
-        setLoading(false);
+  const onSubmit = async (formData) => {
+    try {
+      const result = await API({
+        endpoint: "contact/send",
+        language,
+        method: "POST",
+        body: formData,
+      });
+
+      if (result.success) {
+        alert("Correo enviado correctamente");
+        reset();
+      } else {
+        alert(result.message || "Hubo un problema al enviar el correo");
       }
-    };
-
-    fetchContact();
-  }, [language]);
+    } catch (error) {
+      console.error("Error al enviar el correo:", error);
+      alert("Error al enviar el correo");
+    }
+  };
 
   return (
     <div className="contact">
-      {loading && <p>Loading...</p>}
-      {error && (
-        <div className="error">
-          <p>{`Error: ${error}`}</p>
-          <button onClick={() => window.location.reload()}>Retry</button>
-        </div>
-      )}
-     {!loading && !error && contact.length > 0 ? (
-        <div className="contactsContainer">
-          <div>contact</div>
-        </div>
-      ) : (
-        !loading && <p>No info available.</p>
-      )}
+      <div className="contact-form">
+        <h2>Contáctame</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>Nombre:</label>
+            <input
+              type="text"
+              {...register("name", { required: "El nombre es obligatorio" })}
+            />
+            {errors.name && (
+              <p style={{ color: "red" }}>{errors.name.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label>Correo Electrónico:</label>
+            <input
+              type="email"
+              {...register("email", {
+                required: "El correo electrónico es obligatorio",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Correo electrónico inválido",
+                },
+              })}
+            />
+            {errors.email && (
+              <p style={{ color: "red" }}>{errors.email.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label>Mensaje:</label>
+            <textarea className="textarea"
+              {...register("message", {
+                required: "El mensaje es obligatorio",
+              })}
+            ></textarea>
+            {errors.message && (
+              <p style={{ color: "red" }}>{errors.message.message}</p>
+            )}
+          </div>
+
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
     </div>
   );
-}
+};
 
-export default Contact
+export default Contact;
