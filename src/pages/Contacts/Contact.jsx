@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Contact.css";
 import { LanguageContext } from "../../utils/Context/LenguageContext";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,9 @@ import { API } from "../../utils/API/API";
 
 const Contact = () => {
   const { language } = useContext(LanguageContext);
+  const [contactData, setContactData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const {
     register,
@@ -13,6 +16,25 @@ const Contact = () => {
     formState: { errors },
     reset,
   } = useForm();
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await API({ endpoint: "contacts", language });
+        setContactData(data);
+        console.log(contactData);
+      } catch (err) {
+        setError(err.message || "Unexpected error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContactData();
+  }, [language]);
 
   const onSubmit = async (formData) => {
     try {
@@ -35,13 +57,18 @@ const Contact = () => {
     }
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+  if (!contactData) return <p>No se encontraron datos de contacto</p>;
+
   return (
     <div className="contact">
-      <div className="contact-form">
-        <h2>Contáctame</h2>
+      {contactData ? (
+        <div className="contact-form " >
+        <h2>{contactData[0].header}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>Nombre:</label>
+            <label>{contactData[0].form[0]}:</label>
             <input
               type="text"
               {...register("name", { required: "El nombre es obligatorio" })}
@@ -52,7 +79,7 @@ const Contact = () => {
           </div>
 
           <div>
-            <label>Correo Electrónico:</label>
+            <label>{contactData[0].form[1]}:</label>
             <input
               type="email"
               {...register("email", {
@@ -69,8 +96,9 @@ const Contact = () => {
           </div>
 
           <div>
-            <label>Mensaje:</label>
-            <textarea className="textarea"
+            <label>{contactData[0].form[2]}:</label>
+            <textarea
+              className="textarea"
               {...register("message", {
                 required: "El mensaje es obligatorio",
               })}
@@ -80,9 +108,12 @@ const Contact = () => {
             )}
           </div>
 
-          <button type="submit">Enviar</button>
+          <button type="submit">{contactData[0].form[3]}</button>
         </form>
-      </div>
+        </div>
+      ) : (
+        <p>Cargando datos del formulario...</p>
+      )}
     </div>
   );
 };
