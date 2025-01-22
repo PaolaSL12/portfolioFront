@@ -49,7 +49,7 @@ const Certificates = () => {
               alt={certificate.name}
             />
             <div className="content">
-            <h3>{certificate.name}</h3>
+            <h2>{certificate.name}</h2>
             <p>{certificate.academy}</p>
             </div>
             </div>

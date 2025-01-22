@@ -21,11 +21,11 @@
   --psl-padding-l: 40px;
   --psl-padding-xl: 50px;
 
-  --psl-gap-s: 20px;
-  --psl-gap-m: 40px;
-  --psl-gap-l: 60px;
+  --psl-gap-1: 10px;
+  --psl-gap-2: 15px;
+  --psl-gap-3: 30px;
 
-  --psl-br: 10px;
+  --psl-br: 7px;
 }
 
 * {
@@ -37,5 +37,11 @@
   color: var(--psl-color-5);
   font-family: "Source Code Pro", monospace;
   user-select: none;
+  background-color: var(--psl-color-1);
+}
+
+h2 {
+  color: var(--psl-color-3);
+  text-transform: uppercase;
 }
 

@@ -8,7 +8,7 @@
     align-items: center;
     flex-wrap: wrap;
     padding: var(--psl-padding-l);
-    gap: 10px;
+    gap: var(--psl-gap-1);
 }
 
 .heroImg {

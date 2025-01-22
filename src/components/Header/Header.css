@@ -19,7 +19,11 @@ nav ul {
 }
 
 .logo p {
-  font-size: 2.1em;
+  font-size: 2.3em;
+}
+
+.Psl {
+ color: var(--psl-color-5);
 }
 
 .toggleImg {
@@ -32,7 +36,7 @@ li {
 }
 
 .active {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--psl-color-3);
 }
 
 .toggle {
@@ -48,7 +52,7 @@ li {
   justify-content: space-around;
   padding: var(--psl-padding-xxs);
   border-radius: var(--psl-br);
-  border: 1px solid var(--psl-color-5);
+  border: 1px solid var(--psl-color-3);
 }
 
 .flag-icon {
