@@ -47,6 +47,7 @@ const Certificates = () => {
               c={certificate.name}
               url={certificate.imageUrl}
               alt={certificate.name}
+              sc={"certificateImg"}
             />
             <div className="content">
             <h2>{certificate.name}</h2>

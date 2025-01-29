@@ -3,8 +3,11 @@ import { API } from "../../utils/API/API";
 import ImgWrapper from "../../components/ImgWrapper/ImgWrapper";
 import "./Home.css";
 import { LanguageContext } from "../../utils/Context/LenguageContext";
+import { useProjects } from "../../utils/Context/ProjectsContext";
+import Card from "../../components/Card/Card";
 
 const Home = () => {
+  const { projectsData, fetchProjects } = useProjects();
   const { language } = useContext(LanguageContext);
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      setError(null); 
+      setError(null);
 
       try {
         const data = await API({ endpoint: "profiles", language });
@@ -25,8 +28,11 @@ const Home = () => {
       }
     };
 
+    fetchProjects(language);
+    console.log(projectsData);
+
     fetchData();
-  }, [language]); 
+  }, [language]);
 
   return (
     <div className="home">
@@ -38,6 +44,12 @@ const Home = () => {
           <p>{profileData[0]?.aboutMe || "No information available."}</p>
         </div>
       ) : null}
+
+      <div className="homeCards">
+        {projectsData.map((project) => (
+          <Card project={project} key={project._id} />
+        ))}
+      </div>
     </div>
   );
 };

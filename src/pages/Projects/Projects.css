@@ -3,10 +3,16 @@
     min-height: 85svh;
     background-color: var(--psl-color-1);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     padding: var(--psl-padding-l);
-    gap: var(--psl-gap-1);
+    gap: var(--psl-gap-3);
 }
+
+@media screen and (max-width: 450px) {
+    .projects {
+        padding: var(--psl-padding-s);
+    }
+  }

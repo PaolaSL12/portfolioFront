@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 :root {
-  --psl-color-1: #EBEBEB;
-  --psl-color-2: #D7D0C8; 
-  --psl-color-3: #BD897E; 
-  --psl-color-4: #5E807F;
-  --psl-color-5: #1E1E1E; 
+  --psl-color-1: #fafcf9;
+  --psl-color-2: #e6d4bc; 
+  --psl-color-3: #ED9440; 
+  --psl-color-4: #B0A316;
+  --psl-color-5: #001d37; 
+  --psl-color-6: #d1dbdc;
 
   --psl-margin-xxs: 7px;
   --psl-margin-xs: 10px;

@@ -20,7 +20,11 @@ const Header = () => {
   return (
     <nav>
       <Link to="/" className="logo">
-        <p className="Psl">Paola Sanchez</p>
+      <ImgWrapper
+          c={"logoImg"}
+          url={"./assets/logo.png"}
+          alt={"logo"}
+        />
       </Link>
 
       <div

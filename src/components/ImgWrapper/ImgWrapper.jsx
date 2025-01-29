@@ -1,9 +1,9 @@
 import "./ImgWrapper.css"
 
-const ImgWrapper = ({ url, alt, c }) => {
+const ImgWrapper = ({ url, alt, c, imgc="" }) => {
     return (
       <div className={`ImgWpr ${c}`} >
-        <img src={url} alt={alt} />
+        <img src={url} alt={alt} className={imgc}/>
       </div>
     );
   };
