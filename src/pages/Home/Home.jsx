@@ -20,7 +20,8 @@ const Home = () => {
 
       try {
         const data = await API({ endpoint: "profiles", language });
-        setProfileData(data);
+      setProfileData(data);
+      console.log(data); 
       } catch (err) {
         setError(err.message || "Unexpected error occurred");
       } finally {
