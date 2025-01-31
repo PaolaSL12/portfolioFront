@@ -40,6 +40,7 @@ const ProjectDetails = () => {
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 
   return (
+    <>
     <div className="projectDetails">
       <h1>{projectDetails?.title}</h1>
       <AWrapper
@@ -70,8 +71,9 @@ const ProjectDetails = () => {
         </div>
       ))}
 
-      <Footer /> 
     </div>
+          <Footer /> 
+          </>
   );
 };
 
