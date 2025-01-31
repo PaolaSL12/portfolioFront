@@ -3,6 +3,7 @@ import AWrapper from "../../components/aWrapper/aWrapper";
 import { API } from "../../utils/API/API";
 import "./Certificates.css";
 import { LanguageContext } from "../../utils/Context/LenguageContext";
+import Footer from "../../components/Footer/Footer";
 
 const Certificates = () => {
   const { language } = useContext(LanguageContext);
@@ -59,6 +60,8 @@ const Certificates = () => {
       ) : (
         !loading && <p>No certificates available.</p>
       )}
+
+      <Footer />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { LanguageContext } from "../../utils/Context/LenguageContext";
 import "./Projects.css";
 import { useProjects } from "../../utils/Context/ProjectsContext";
 import Card from "../../components/Card/Card";
+import Footer from "../../components/Footer/Footer";
 
 const Projects = () => {
   const { language } = useContext(LanguageContext); 
@@ -22,6 +23,8 @@ const Projects = () => {
       {projectsData.map((project) => (
         <Card project={project} key={project._id} />
       ))}
+
+      <Footer />
     </div>
   );
 };

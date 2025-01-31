@@ -4,6 +4,7 @@ import { LanguageContext } from "../../utils/Context/LenguageContext";
 import { useForm } from "react-hook-form";
 import { API } from "../../utils/API/API";
 import AWrapper from "../../components/aWrapper/aWrapper";
+import Footer from "../../components/Footer/Footer";
 
 const Contact = () => {
   const { language } = useContext(LanguageContext);
@@ -121,23 +122,8 @@ const Contact = () => {
       ) : (
         <p>Cargando datos del formulario...</p>
       )}
-      <div className="footer">
 
-          <AWrapper
-            href={contactData[0].socials[0].url}
-            c="footerImg"
-            url={"./assets/linkedin.png"}
-            alt={contactData[0].socials[0].name}
-          />
- 
-          <AWrapper
-            href={contactData[0].socials[1].url}
-            c="footerImg"
-            url={"./assets/github.png"}
-            alt={contactData[0].socials[1].name}
-          />
-
-      </div>
+<Footer />
     </div>
   );
 };

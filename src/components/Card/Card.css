@@ -25,6 +25,7 @@
 .cardContent > h2, 
 .cardContent > p {
   background-color: inherit;
+  line-height: 1.6
 }
 
 .cardContent, .projectImg {

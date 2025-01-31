@@ -5,6 +5,7 @@ import "./Home.css";
 import { LanguageContext } from "../../utils/Context/LenguageContext";
 import { useProjects } from "../../utils/Context/ProjectsContext";
 import Card from "../../components/Card/Card";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   const { projectsData, fetchProjects } = useProjects();
@@ -20,8 +21,8 @@ const Home = () => {
 
       try {
         const data = await API({ endpoint: "profiles", language });
-      setProfileData(data);
-      console.log(data); 
+        setProfileData(data);
+        console.log(data[1]);
       } catch (err) {
         setError(err.message || "Unexpected error occurred");
       } finally {
@@ -37,20 +38,26 @@ const Home = () => {
 
   return (
     <div className="home">
-      <ImgWrapper c={"heroImg"} url={"./assets/icon.png"} alt={"heroImg"} />
+      <ImgWrapper c={"me"} url={"https://res.cloudinary.com/daowiromv/image/upload/v1738256634/portfolio/me2_go9tzm.jpg"} alt={"picture"} imgc="picture" />
       {loading && <p>Loading...</p>}
       {error && <p className="error">{`Error: ${error}`}</p>}
       {!loading && !error && profileData ? (
         <div className="infoHero">
-          <p>{profileData[0]?.aboutMe || "No information available."}</p>
+          <p className="text">{profileData[0]?.aboutMe1 || "No information available."}</p>
+          <ImgWrapper c={"heroImg"} url={"./assets/icon.png"} alt={"heroImg"} />
+          <p className="text2">{profileData[0]?.aboutMe2 || "No information available."}</p>
         </div>
       ) : null}
+
+      
 
       <div className="homeCards">
         {projectsData.map((project) => (
           <Card project={project} key={project._id} />
         ))}
       </div>
+
+      <Footer />
     </div>
   );
 };
